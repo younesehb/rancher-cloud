@@ -1,3 +1,17 @@
 #cloud-config
+users:
+  - default
+  - name: rancher
+    lock_passwd: false
+    passwd: QimInfo2020
+    gecos: rancher
 ssh-authorized-keys:
  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4zWuKy/SSaIiOunE4m9eFUqNrSv4Nq0zkLIDPOOmALdFiw3LCESjz/omXMW+YVP5ZfzXG/OggebogEd4hRI/ao8e2Ipn2jIeRfvxOitWgwmY/pTmcGVv3Gezp7PJis+Fct+LumuRU5sfHM0sXZX72NzzpbIwn4usFMOxxFWim4bh+vGwZpX4GzpxXvJGvMJ7JR99J3XLXfXb7BokhjiknwrsGYyCIx2CZWi+ssKK0pzmbSyybU4flEfrP+MKpR2C2ef094qPi7hN9jhfRr9pj5kIO0WTuuDmf/bHGXf1Gq6kjTOSYKmvhVZBQJRfyfPGO+evOK6xtAQTJPj/ajSSf
+package_upgrade: true
+runcmd:
+ - sudo wget https://busybox.net/downloads/binaries/1.31.0-i686-uclibc/busybox_STAT -O /bin/stat
+ - sudo wget https://busybox.net/downloads/binaries/1.31.0-i686-uclibc/busybox_FLOCK -O /bin/flock
+ - sudo chmod +x /bin/stat
+ - sudo chmod +x /bin/flock
+ - sudo ros s enable open-iscsi
+ - sudo ros s up open-iscsi
